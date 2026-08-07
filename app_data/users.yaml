@@ -1,3 +1,10 @@
+- email: admin@inveniosoftware.org
+  active: false
+  password:
+  roles:
+    - admin
+  allow:
+    - superuser-access
 - email: user@demo.org
   username: "demo"
   full_name: "Demo User"
