@@ -1,6 +1,8 @@
 [cli]
 flavour = RDM
 logfile = /logs/invenio-cli.log
+python_package_manager = uv
+javascript_package_manager = pnpm
 
 [cookiecutter]
 project_name = InvenioRDM Demo Site
@@ -11,7 +13,7 @@ description = InvenioRDM Demo Instance
 author_name = CERN
 author_email = info@inveniosoftware.org
 year = 2020
-python_version = 3.7
+python_version = 3.14
 database = postgresql
 opensearch = 2
 file_storage = local
@@ -22,7 +24,6 @@ docker = {'nginx': {'test.crt': 'c4b685e12855e07ebc9698cba5386a33540a0b4de5df688
 invenio.cfg = 65eef6922e44cd240e72babe053747956bd03f203c9757c98056e29519ab255e
 docker-services.yml = 1995a184ab1ccabf6c5f72fef1fc4f8798327845ce8dd04f897b3fc7f6068bd3
 dockerfile = 37ec18b05a471c54135dd793fcccac71962d95c3562a427b6198423b16f3896b
-pipfile = cc028d17b629faf345ae973a5dc497e7473226a51b599187120ef423ad05c1b6
 .dockerignore = 21241bc12cdf4ac5f209d6b191adc8f25eb89af93ce5c4c3f72c86661162d7b5
 static = {'images': {'logo.svg': 'b616fba0c52f4c97331daf5d11884cf9ea2edf312cc00b61a7aa7d2fb037e417'}}
 docker-compose.full.yml = af36baeb2c79a1adcc6f3dd5dc4a22d1a399fe5481cad2f668b8b6434f13cc0f

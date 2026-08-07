@@ -1,0 +1,14 @@
+[project]
+name = "demo-inveniordm-app"
+version = "14.0.0"
+authors = [{ name = "CERN", email = "info@inveniosoftware.org" }]
+license = "MIT"
+requires-python = "~=3.14.0"
+dependencies = [
+    "invenio-app-rdm[opensearch2]~=14.0.0",
+    "lxml-html-clean>=0.1.1",
+    "pyuwsgi>=2.0",
+    "sentry-sdk[flask]>=1.0.0,<2.0.0",
+    "uwsgi-tools>=1.1.1",
+    "uwsgitop>=0.11",
+]
