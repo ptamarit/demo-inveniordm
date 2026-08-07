@@ -54,7 +54,11 @@ invenio communities custom-fields init
 
 # Add demo and fixtures data
 # -------------
-invenio rdm-records fixtures
+# NOTE: run eagerly, otherwise this returns before Celery has written the rows
+#       and the awards import below finds no funders.
+INVENIO_CELERY_TASK_ALWAYS_EAGER=True \
+INVENIO_CELERY_TASK_EAGER_PROPAGATES=True \
+    invenio rdm-records fixtures
 invenio rdm-records demo
 # Import awards vocabulary
 invenio vocabularies import --vocabulary awards --origin "app_data/vocabularies/awards_sample.tar"
