@@ -12,6 +12,9 @@ services:
         - ENVIRONMENT=DEV
     image: demo-inveniordm
     environment:
+      # invenio.cfg carries the :5000 development port, which is wrong behind nginx
+      - "INVENIO_SITE_UI_URL=https://127.0.0.1"
+      - "INVENIO_SITE_API_URL=https://127.0.0.1/api"
       - "INVENIO_ACCOUNTS_SESSION_REDIS_URL=redis://cache:6379/1"
       - "INVENIO_BROKER_URL=amqp://guest:guest@mq:5672/"
       - "INVENIO_CACHE_REDIS_URL=redis://cache:6379/0"
@@ -64,7 +67,7 @@ services:
       - "15672:15672"
       - "5672:5672"
   search:
-    image: registry.cern.ch/docker.io/opensearchproject/opensearch:2.15.0
+    image: registry.cern.ch/docker.io/opensearchproject/opensearch:2.19.5
     restart: "unless-stopped"
     environment:
       # settings only for development. DO NOT use in production!
@@ -96,7 +99,7 @@ services:
       - "9200:9200"
       - "9600:9600"
   opensearch-dashboards:
-    image: registry.cern.ch/docker.io/opensearchproject/opensearch-dashboards:2.15.0
+    image: registry.cern.ch/docker.io/opensearchproject/opensearch-dashboards:2.19.5
     ports:
       - "5601:5601"
     expose:
