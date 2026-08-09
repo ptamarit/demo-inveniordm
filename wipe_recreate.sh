@@ -20,6 +20,8 @@ case "${response}" in
         ;;
 esac
 
+instance_data="$(invenio shell --no-term-title -c "print(app.instance_path)")/data"
+
 # Wipe
 # ----
 invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
@@ -28,13 +30,18 @@ invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.c
 invenio db drop --yes-i-know
 invenio index destroy --force --yes-i-know
 invenio index queue init purge
+# NOTE: contents only, the directory itself is a mounted volume.
+if [ -d "$instance_data" ]; then
+    find "$instance_data" -mindepth 1 -delete
+    echo "Deposited files removed from $instance_data"
+fi
 
 # Recreate
 # --------
 # NOTE: db init is not needed since DB keeps being created
 #       Just need to create all tables from it.
 invenio db create
-invenio files location create --default 'default-location' "$(invenio shell --no-term-title -c "print(app.instance_path)")/data"
+invenio files location create --default 'default-location' "$instance_data"
 #
 # Create roles
 #
